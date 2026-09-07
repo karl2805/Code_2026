@@ -16,17 +16,14 @@ ser.write(str.encode(command))
 
 
 while True:
-    data_recieved = ser.read_until(size=command.__sizeof__())
+#    data_recieved = ser.read_until(size=command.__sizeof__())
     data_recieved = ser.read_until(b'\n', size=None)
 
-    # data_recieved = ser.read_until(b'\n').decode().strip()
-
-    #print(f"Recieved {str(data_recieved.decode().strip())}")
 
     if data_recieved.decode().startswith("Output"):
         vals_str = re.findall(r'[-+]?\d+[\.]?\d*', str(data_recieved) )
         vals = [float(x) for x in vals_str]  # Convert strings to actual numbers
-        print(vals)
+        print("Voltages Recieved:", vals)
 
 
 
